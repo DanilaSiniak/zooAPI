@@ -10,7 +10,7 @@ Route::prefix('shelters')->group(function () {
 	Route::delete('/workers/{worker_id}', ['uses' => 'WorkersController@delete'])->where(['worker_id' => '[0-9]+']);
 });
 
-Route::prefix('animals')->group(function () {
+Route::prefix('animals')->middleware(['pubsub'])->group(function () {
 
 	Route::get('/', ['uses' => 'AnimalsController@getAnimals']);
 	Route::get('/{animal_id}', ['uses' => 'AnimalsController@detailt'])->where(['animal_id' => '[0-9]+']);
@@ -22,5 +22,6 @@ Route::prefix('animals')->group(function () {
 	Route::delete('/requests/{request_id}', ['uses' => 'AdaptationRequestsController@delete'])
 		->where(['request_id' => '[0-9]+']);
 });
+
 
 
